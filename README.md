@@ -166,9 +166,11 @@ it from the Beeper servers (e.g. any rooms and ghost users it created).
 For official bridges, it will also delete the local data directory with the
 bridge config, database and python virtualenv (if applicable).
 
-If you ran the bridge using `bbctl run -l`, you should delete it using
-`bbctl delete -l` to ensure that the relevant bridge config is
-deleted.
+Note that deleting a bridge through the Beeper client settings will
+*not* delete the bridge database that is stored locally; you must
+delete that yourself, or use `bbctl delete` instead. (If you created
+the bridge database with `bbctl run -l`, then run `bbctl delete -l`
+from the same working directory to delete it.)
 
 If you later re-add a self-hosted bridge after deleting it from the
 Beeper servers but not deleting the local database, you should expect
