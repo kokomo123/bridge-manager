@@ -24,15 +24,20 @@ var envs = map[string]string{
 }
 
 type EnvConfig struct {
-	ClusterID     string `json:"cluster_id"`
-	Username      string `json:"username"`
-	AccessToken   string `json:"access_token"`
-	BridgeDataDir string `json:"bridge_data_dir"`
-	DatabaseDir   string `json:"database_dir,omitempty"`
+	ClusterID      string `json:"cluster_id"`
+	Username       string `json:"username"`
+	AccessToken    string `json:"access_token"`
+	BridgeDataDir  string `json:"bridge_data_dir"`
+	DatabaseDir    string `json:"database_dir,omitempty"`
+	DesktopDataDir string `json:"desktop_data_dir,omitempty"`
 }
 
 func (ec *EnvConfig) HasCredentials() bool {
-	return strings.HasPrefix(ec.AccessToken, "syt_")
+	return strings.HasPrefix(ec.AccessToken, "syt_") || strings.HasPrefix(ec.AccessToken, "bat_")
+}
+
+func (ec *EnvConfig) UsesDesktopLogin() bool {
+	return ec.DesktopDataDir != ""
 }
 
 type EnvConfigs map[string]*EnvConfig
